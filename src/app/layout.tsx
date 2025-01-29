@@ -8,9 +8,9 @@ export const metadata: Metadata = {
     template: APP_TITLE_TEMPLATE,
   },
   description: "center secours skhour rhamna",
-  manifest: "/src/app/manifest.json",
+  manifest: "/public/manifest.json",
   appleWebApp: {
-    capable: true,  
+    capable: true,
     statusBarStyle: "default",
     title: "Protection civile S/C",
     // startUpImage: [],
