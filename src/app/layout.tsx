@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import Header from "@/components/Header";
+import Navbar from "@/components/Navbar";
 const APP_TITLE_TEMPLATE = "%s - Protection civile S/C";
 export const metadata: Metadata = {
   applicationName: "Protection civile S/C",
@@ -48,7 +50,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased`}>{children}</body>
+      <body className={`antialiased`}>
+        <Header />
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }

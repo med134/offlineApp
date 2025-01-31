@@ -6,4 +6,12 @@ const withPWA = withPWAInit({
 
 export default withPWA({
   reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+    ],
+  },
 });

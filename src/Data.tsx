@@ -23,6 +23,10 @@ export function AddFriendForm({ defaultAge } = { defaultAge: 21 }) {
     }
   }
 
+  /*  async function updateFriend(id: number, updates: Partial<Friend>) {
+    await db.friends.update(id, { ...updates });
+  } */
+
   return (
     <>
       <p>{status}</p>
@@ -30,6 +34,7 @@ export function AddFriendForm({ defaultAge } = { defaultAge: 21 }) {
       <input
         type="text"
         value={name}
+        required
         onChange={(ev) => setName(ev.target.value)}
       />
       Age:
