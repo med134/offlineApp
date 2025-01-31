@@ -4,7 +4,7 @@ type Personnel = {
   _id: string;
   name: string;
   ppr: string;
-  phone: string;
+  gsm: string;
   cin: string;
   function: string;
   address: string;
@@ -19,7 +19,7 @@ pouchDB.put({
   _id: "1",
   name: "mohamed dakir",
   ppr: "146975",
-  phone: "0666666666",
+  gsm: "0666666666",
   cin: "EE66666",
   function: "chef de service",
   address: "skhour rhamna",

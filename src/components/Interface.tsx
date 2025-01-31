@@ -2,7 +2,7 @@ export interface Personnel {
   _id: "string";
   name: string;
   ppr: string;
-  phone: string;
+  gsm: string;
   cin: string;
   function: string;
   address: string;
