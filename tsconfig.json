@@ -29,6 +29,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "next.config.mjs"
-  ],
+, "src/app/personnels/[id]/page.jsx", "src/app/personnels/page.tsx", "src/components/PersonnelTable.jsx"  ],
   "exclude": ["node_modules"]
 }
