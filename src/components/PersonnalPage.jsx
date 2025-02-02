@@ -1,50 +1,79 @@
-"use client";
-import PersonnelTable from "@/components/PersonnelTable";
-import { pouchDB } from "@/utils/Poush";
-import React, { useState, useEffect } from "react";
-import SkeltonTable from "./SkeltonTable";
+"use client"
+import React, { useState, useEffect } from 'react';
+import { pouchDB } from '../utils/Poush';
 
 const PersonnalPage = () => {
   const [personnels, setPersonnels] = useState([]);
-  const [loading, setLoading] = useState(false); // Ensure state is an array
+  const [name, setName] = useState('');
+  const [age, setAge] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
         const result = await pouchDB.allDocs({ include_docs: true });
-        const personnelList = result.rows
-          .map((row) => row.doc)
-          .filter((doc) => !!doc); // Remove undefined/null values
-
+        const personnelList = result.rows.map(row => row.doc);
         setPersonnels(personnelList);
-        setLoading(false);
       } catch (err) {
-        console.error("Error fetching documents:", err);
+        console.error('Error fetching documents:', err);
       }
     };
     fetchData();
   }, []);
 
-  // Log updated state
-  useEffect(() => {
-    console.log(personnels);
-  }, [personnels]);
+  const addPersonnel = async (e) => {
+    e.preventDefault();
+    const newPersonnel = {
+      _id: new Date().toISOString(),
+      name,
+      age: parseInt(age),
+    };
+    try {
+      await pouchDB.put(newPersonnel);
+      setPersonnels([...personnels, newPersonnel]);
+      setName('');
+      setAge('');
+    } catch (err) {
+      console.error('Error adding document:', err);
+    }
+  };
+
+  const deletePersonnel = async (id, rev) => {
+    try {
+      await pouchDB.remove(id, rev);
+      setPersonnels(personnels.filter(personnel => personnel._id !== id));
+    } catch (err) {
+      console.error('Error deleting document:', err);
+    }
+  };
 
   return (
-    <div className="py-16">
-      <h1 className="text-2xl py-6 px-6 font-sans font-semibold uppercase">
-        Les informations des agents de PC Skhour Rhamna
-      </h1>
-      {loading ? (
-        <SkeltonTable />
-      ) : (
-        <>
-          {personnels?.map((personnel) => (
-            <PersonnelTable key={personnel._id} personnel={personnel} />
-          ))}
-        </>
-      )}
+    <div>
+      <h1>Personnels</h1>
+      <form onSubmit={addPersonnel}>
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+        <input
+          type="number"
+          placeholder="Age"
+          value={age}
+          onChange={(e) => setAge(e.target.value)}
+          required
+        />
+        <button type="submit">Add Personnel</button>
+      </form>
+      <ul>
+        {personnels.map(personnel => (
+          <li key={personnel._id}>
+            {personnel.name}, {personnel.age}
+            <button onClick={() => deletePersonnel(personnel._id, personnel._rev)}>Delete</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
