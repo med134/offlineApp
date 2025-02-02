@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { Personnel } from "./Interface";
 
-const PersonnelTable: React.FC<{ personnel: Personnel }> = ({ personnel }) => {
+const PersonnelTable = ({ personnel }) => {
   return (
     <div className="flex flex-col p-10">
       <div className=" overflow-x-auto pb-4">

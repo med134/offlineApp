@@ -1,8 +1,9 @@
 import React from 'react'
+import PersonnalPage from '../../components/PersonnalPage'
 const page = () => {
   return (
     <div>
-      personal
+      <PersonnalPage/>
     </div>
   )
 }

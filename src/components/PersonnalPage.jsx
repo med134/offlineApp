@@ -3,21 +3,23 @@ import { Personnel } from "@/components/Interface";
 import PersonnelTable from "@/components/PersonnelTable";
 import { pouchDB } from "@/utils/Poush";
 import React, { useState, useEffect } from "react";
+import SkeltonTable from "./SkeltonTable";
 
 const PersonnalPage = () => {
-  const [personnels, setPersonnels] = useState<Personnel[]>([]); // Ensure state is an array
+  const [personnels, setPersonnels] = useState([]);
+  const [loading, setLoading] = useState(false); // Ensure state is an array
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const result = await pouchDB.allDocs({ include_docs: true });
-
-        // Ensure personnelList is correctly typed
-        const personnelList: Personnel[] = result.rows
-          .map((row) => row.doc as Personnel)
+        const personnelList = result.rows
+          .map((row) => row.doc)
           .filter((doc) => !!doc); // Remove undefined/null values
 
         setPersonnels(personnelList);
+        setLoading(false);
       } catch (err) {
         console.error("Error fetching documents:", err);
       }
@@ -35,9 +37,15 @@ const PersonnalPage = () => {
       <h1 className="text-2xl py-6 px-6 font-sans font-semibold uppercase">
         Les informations des agents de PC Skhour Rhamna
       </h1>
-      {personnels?.map((personnel) => (
-        <PersonnelTable key={personnel._id} personnel={personnel} />
-      ))}
+      {loading ? (
+        <SkeltonTable />
+      ) : (
+        <>
+          {personnels?.map((personnel) => (
+            <PersonnelTable key={personnel._id} personnel={personnel} />
+          ))}
+        </>
+      )}
     </div>
   );
 };
