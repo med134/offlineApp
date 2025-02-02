@@ -29,6 +29,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "next.config.mjs"
-, "src/app/personnels/[id]/page.jsx", "src/app/personnels/page.tsx", "src/components/PersonnelTable.jsx", "src/utils/Poush.js", "src/components/PersonnalPage.jsx"  ],
+, "src/app/personnels/[id]/page.jsx", "src/app/personnels/page.tsx", "src/components/PersonnelTable.jsx", "src/utils/Poush.js", "src/components/PersonnalPage.jsx", "src/components/SkeltonTable.jsx"  ],
   "exclude": ["node_modules"]
 }

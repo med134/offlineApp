@@ -1,5 +1,4 @@
 "use client";
-import { Personnel } from "@/components/Interface";
 import PersonnelTable from "@/components/PersonnelTable";
 import { pouchDB } from "@/utils/Poush";
 import React, { useState, useEffect } from "react";

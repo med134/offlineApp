@@ -1,5 +1,9 @@
-"use client";
+import PersonnalPage from "@/components/PersonnalPage";
 
 export default function Home() {
-  return <div>home page</div>;
+  return (
+    <div>
+      <PersonnalPage />
+    </div>
+  );
 }
