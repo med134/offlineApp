@@ -1,9 +1,10 @@
-import PersonnalPage from "@/components/PersonnalPage";
-
+import Table from "../components/Table";
+import MyPage from "../components/FetchData";
 export default function Home() {
   return (
     <div>
-      <PersonnalPage />
+      <MyPage />
+      <Table />
     </div>
   );
 }
